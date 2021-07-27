@@ -3,14 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.crm.hubspot.TestScript.loginToTheApplication">
+      <class name="com.crm.hubspot.TestScript.TestLoginToTheApplication">
         <methods>
-          <include name="init"/>
           <include name="navigateToBrowser"/>
-          <include name="loginToTheApplication"/>
+          <include name="init"/>
           <include name="setup"/>
+          <include name="loginToTheApplication"/>
         </methods>
-      </class> <!-- com.crm.hubspot.TestScript.loginToTheApplication -->
+      </class> <!-- com.crm.hubspot.TestScript.TestLoginToTheApplication -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

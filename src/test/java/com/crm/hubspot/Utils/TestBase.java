@@ -46,8 +46,7 @@ public class TestBase {
 		driver.manage().window().maximize();
 	}
 	
-	@SuppressWarnings("unchecked")
-	public <T> T loginToTheApplication(String userName , String pass,Class<?> Classname) {
+	public <T> T loginToTheApplication(String userName , String pass,Class Classname) {
 		driver.findElement(By.cssSelector("input[name='txtUsername']")).sendKeys(userName);		
 		driver.findElement(By.cssSelector("input[name='txtPassword']")).sendKeys(pass);
 		driver.findElement(By.id("btnLogin")).click();;

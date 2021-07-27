@@ -13,10 +13,5 @@ public class LoginHelper {
 	private WebElement password;
 	
 	
-	public void enterUserName() {
-		userName.click();
-	}
-	
-	
 
 }
