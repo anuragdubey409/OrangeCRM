@@ -11,5 +11,17 @@ public interface CRMConstanst {
 	public String FirstName= "First Name";
 	public String LastName = "Last Name";
 	public String LastNameValue = "Babloo";
-
+	public String Role = "Role";
+	public String RoleValue = "Manager";
+	public String Company = "Enter Company Domain/Name";
+	public String CompanyValue = "Google";
+	public String Tag = "Multiple tag names separated by comma";
+	public String TagValue = "Sample";
+	public String Address = "Address";
+	public String AddressValue = "Hamidganj";
+	public String City = "City";
+	public String CityValue = "Daltonganj";
+	public String State = "State";
+	public String StateValue = "Jharkhand";
+			
 }

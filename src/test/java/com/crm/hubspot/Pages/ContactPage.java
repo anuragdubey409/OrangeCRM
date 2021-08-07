@@ -32,6 +32,9 @@ public class ContactPage extends DriverHelper{
 	@FindBy(xpath =  "//div[@class='modal-body']/div[@class='form-group']")
 	private List<WebElement> newContactFormSize;
 	
+	@FindBy(css = "select[name='ab-temp-6']")
+	private WebElement EmailDropDowm;
+	
 	public void verifyContactPage(String contactPageText) {
 		String getContactPageText = super.getText(contactPageTitle);
 		if(StringUtils.isNotEmpty(getContactPageText)) {
@@ -83,9 +86,9 @@ public class ContactPage extends DriverHelper{
 				if(getCurrentTextBoxAttribute.equalsIgnoreCase(key)) {
 					super.sendKey(newContactFormTextBox, value);
 				}
-			});
-					
+			});		
 		}
+		super.SelectBy(EmailDropDowm, "Value=secondary");
 	}
 	
 }

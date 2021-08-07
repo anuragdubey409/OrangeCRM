@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 public class DriverHelper {
@@ -143,4 +144,42 @@ public class DriverHelper {
 			Assert.assertEquals(this.getText(element), textToVerify);
 		}
 	}
+	
+	/**
+	 * 
+	 * @param element
+	 * @param option (Index="2" , VisibleText="" , Value="")
+	 */
+	public void SelectBy(String element ,String option) {
+		WebElement ele = this.getWebElement(element);
+		Select select = new Select(ele);
+		if(option.startsWith("Index")) {
+			String ind = option.replace("Index=", "");
+			int index = Integer.parseInt(ind);
+			select.selectByIndex(index);
+		}else if(option.startsWith("VisibleText")) {
+			String visible = option.replace("VisibleText=","");
+			select.selectByVisibleText(visible);
+		}else if(option.startsWith("Value")) {
+			String value = option.replace("Value=","");
+			select.selectByValue(value);
+		}
+	}
+	
+	public void SelectBy(WebElement element ,String option) {
+		Select select = new Select(element);
+		if(option.startsWith("Index")) {
+			String ind = option.replace("Index=", "");
+			int index = Integer.parseInt(ind);
+			select.selectByIndex(index);
+		}else if(option.startsWith("VisibleText")) {
+			String visible = option.replace("VisibleText=","");
+			select.selectByVisibleText(visible);
+		}else if(option.startsWith("Value")) {
+			String value = option.replace("Value=","");
+			select.selectByValue(value);
+		}
+	}
+	
+	
 }

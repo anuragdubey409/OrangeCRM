@@ -26,6 +26,12 @@ public class TestCreateNewContact extends TestBase{
 		newContactDetails = new HashMap<String, String>();
 		newContactDetails.put(CRMConstanst.FirstName, super.generateRandomName());
 		newContactDetails.put(CRMConstanst.LastName , CRMConstanst.LastNameValue);
+		newContactDetails.put(CRMConstanst.Role, CRMConstanst.RoleValue);
+		newContactDetails.put(CRMConstanst.Company,CRMConstanst.CompanyValue);
+		newContactDetails.put(CRMConstanst.Tag,CRMConstanst.TagValue);
+		newContactDetails.put(CRMConstanst.Address, CRMConstanst.AddressValue);
+		newContactDetails.put(CRMConstanst.City,CRMConstanst.CityValue);
+		newContactDetails.put(CRMConstanst.State, CRMConstanst.StateValue);
 	}
 	
 	
@@ -35,12 +41,16 @@ public class TestCreateNewContact extends TestBase{
 		//Login to the application
 		dashboardPage = loginToTheApplication(userName, password, DashboardPage.class);
 		
+		//Verify Dashboard
 		dashboardPage.verifyDashboard(CRMConstanst.dashboardText);
 		
+		//Navigate To Contact
 		contactPage = dashboardPage.navigateToMenu(CRMConstanst.Contacts, CRMConstanst.Contacts, ContactPage.class);
 		
+		//veriy Contact Page
 		contactPage.verifyContactPage(CRMConstanst.Contacts);
 		
+		//Create New Contact
 		contactPage.createNewContact(newContactDetails);
 	}
 	
