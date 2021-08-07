@@ -1,5 +1,7 @@
 package com.crm.hubspot.Utils;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +23,9 @@ public class DriverHelper {
 		} else if (webElement.startsWith("css=")) {
 			String ele = webElement.replace("css=", "");
 			element = By.cssSelector(ele);
+		} else if(webElement.startsWith("id=")) {
+			String ele = webElement.replace("id=", "");
+			element = By.id(ele);
 		}
 		return element;
 	}
@@ -33,6 +38,10 @@ public class DriverHelper {
 	 */
 	public WebElement getWebElement(String Webelement) {
 		return driver.findElement(byLocator(Webelement));
+	}
+	
+	public List<WebElement> getWebElements(String element){
+		return driver.findElements(byLocator(element));
 	}
 
 	/**
@@ -107,6 +116,26 @@ public class DriverHelper {
 			e.printStackTrace();
 		}
 		return text;
+	}
+	
+	public String getAttribute(String element,String attribute) {
+		String attributeText = "";
+		WebElement ele = this.getWebElement(element);
+		try {
+			if (ele.isDisplayed()) {
+				attributeText = ele.getAttribute(attribute);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return attributeText;
+	
+	}
+	
+	
+	public int getSize(String locatorCount) {
+		List<WebElement> locator =  this.getWebElements(locatorCount);
+		return locator.size();
 	}
 
 	public void verifyText(WebElement element, String textToVerify) {

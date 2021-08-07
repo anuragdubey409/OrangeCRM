@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import com.crm.hubspot.Pages.DashboardPage;
 import com.crm.hubspot.Pages.HomePage;
 import com.crm.hubspot.Utils.CRMConstanst;
+import com.crm.hubspot.Utils.PropertyFileUtils;
 import com.crm.hubspot.Utils.TestBase;
 
 public class TestLoginToTheApplication extends TestBase{
@@ -15,6 +16,7 @@ public class TestLoginToTheApplication extends TestBase{
 	
 	@BeforeClass
 	public void init() {
+		PropertyFileUtils property = new PropertyFileUtils("testData.properties");
 		userName = property.readProperty("AdminUsername");
 		password = property.readProperty("AdminPassword");
 	}
@@ -25,11 +27,13 @@ public class TestLoginToTheApplication extends TestBase{
 		//Login to the application
 		DashboardPage dashboardPage = super.loginToTheApplication(userName,password,DashboardPage.class);
 		
-		//verify dashboard Page
-		dashboardPage.verifyDashobardPage(CRMConstanst.dashboardText);
+		dashboardPage.verifyDashboard(CRMConstanst.dashboardText);
 		
-		dashboardPage.navigateToMenu("Leave", DashboardPage.class);
-		
+		super.logoutFromApplication();
 	}
+	
+	
+	
+	
 
 }

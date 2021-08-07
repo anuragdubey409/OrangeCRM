@@ -1,5 +1,9 @@
 package com.crm.hubspot.Utils;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +18,7 @@ import org.testng.annotations.BeforeTest;
 import com.crm.constant.Browser;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class TestBase {
+public class TestBase extends InitializeClass{
 	
 	protected WebDriver driver;
 	protected PropertyFileUtils property;
@@ -46,20 +50,22 @@ public class TestBase {
 		driver.manage().window().maximize();
 	}
 	
-	public <T> T loginToTheApplication(String userName , String pass,Class Classname) {
-		driver.findElement(By.cssSelector("input[name='txtUsername']")).sendKeys(userName);		
-		driver.findElement(By.cssSelector("input[name='txtPassword']")).sendKeys(pass);
-		driver.findElement(By.id("btnLogin")).click();;
-		return (T) PageFactory.initElements(driver, Classname);
-	}
+	public <T> T loginToTheApplication(String userName , String pass,Class<?> Classname) {
+		driver.findElement(By.cssSelector("input[type='email']")).sendKeys(userName);		
+		driver.findElement(By.cssSelector("input[type='password']")).sendKeys(pass);
+		driver.findElement(By.cssSelector("button[type='submit']")).click();
+		return (T) PageFactory.initElements(driver, Classname); 
+	} 
 	
 	
 	
 	
 	public void initChromeBrowser() {	
 		WebDriverManager.chromedriver().arch64().setup();
-		ChromeOptions  option = new ChromeOptions();
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--disable-blink-features");
+		options.addArguments("--disable-blink-features=AutomationControlled");
+		driver = new ChromeDriver(options);
 	}
 	
 	
@@ -77,5 +83,19 @@ public class TestBase {
 		driver = new EdgeDriver();
 	}
 	
+	public String generateRandomName() {
+		Random rand = new Random();
+		int randomDigit = rand.nextInt(100000);
+		return "Test"+randomDigit;
+	}
+	
+	/**
+	 * Logout from the application
+	 */
+	public void logoutFromApplication() {
+		driver.findElement(By.xpath("//span[@class='user-name']/parent::a")).click();
+		driver.findElement(By.xpath("//a[contains(text(),'Logout')]")).click();
+	}
+
 }
 
