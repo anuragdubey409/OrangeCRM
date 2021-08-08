@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import com.crm.hubspot.Utils.DriverHelper;
+import com.crm.hubspot.DriverUtils.DriverHelper;
 
 public class DashboardPage extends DriverHelper {
 
@@ -42,12 +42,6 @@ public class DashboardPage extends DriverHelper {
 	 * @return
 	 */
 	public <T> T navigateToMenu(String Menu,String SubMenu , Class<T> className) {
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		int count = MenuBar.size();
 		for(int i=2;i<=count;i++) {
 			String getMenuBarName = "//ul[@class='nav navbar-nav navbar-left be-user-nav topmenu-nav']/li["+i+"]/a";
@@ -65,7 +59,6 @@ public class DashboardPage extends DriverHelper {
 					super.clickOn(subMenuBarLocator);
 				}
 			}
-			
 		}
 	}	
 		return (T) PageFactory.initElements(driver, className);
@@ -76,17 +69,11 @@ public class DashboardPage extends DriverHelper {
 	 * @param text
 	 */
 	public void verifyDashboard(String text) {
-//		try {
-//			Thread.sleep(3000);
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		String dashboardText = super.getText(marketingDashboardText);
-//		if(StringUtils.isNotEmpty(dashboardText)) {
-//			Assert.assertEquals(dashboardText, text);
-//		}
-//		
+		wait.waitForElementToBeVisible(marketingDashboardText);
+		String dashboardText = super.getText(marketingDashboardText);
+		if(StringUtils.isNotEmpty(dashboardText)) {
+			Assert.assertEquals(dashboardText, text);
+		}
 	}
 	
 	

@@ -4,11 +4,11 @@ package com.crm.hubspot.TestScript;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.crm.constant.CRMConstanst;
+import com.crm.hubspot.DriverUtils.TestBase;
+import com.crm.hubspot.GlobalUtils.PropertyFileUtils;
 import com.crm.hubspot.Pages.DashboardPage;
 import com.crm.hubspot.Pages.HomePage;
-import com.crm.hubspot.Utils.CRMConstanst;
-import com.crm.hubspot.Utils.PropertyFileUtils;
-import com.crm.hubspot.Utils.TestBase;
 
 public class TestLoginToTheApplication extends TestBase{
 	String userName;
@@ -25,7 +25,7 @@ public class TestLoginToTheApplication extends TestBase{
 	public void loginToTheApplication() {
 		
 		//Login to the application
-		DashboardPage dashboardPage = super.loginToTheApplication(userName,password,DashboardPage.class);
+		dashboardPage = super.loginToTheApplication(userName,password,DashboardPage.class);
 		
 		dashboardPage.verifyDashboard(CRMConstanst.dashboardText);
 		

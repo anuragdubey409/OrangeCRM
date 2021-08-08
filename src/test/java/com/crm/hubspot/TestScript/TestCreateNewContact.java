@@ -6,11 +6,11 @@ import java.util.Map;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.crm.constant.CRMConstanst;
+import com.crm.hubspot.DriverUtils.TestBase;
+import com.crm.hubspot.GlobalUtils.PropertyFileUtils;
 import com.crm.hubspot.Pages.ContactPage;
 import com.crm.hubspot.Pages.DashboardPage;
-import com.crm.hubspot.Utils.CRMConstanst;
-import com.crm.hubspot.Utils.PropertyFileUtils;
-import com.crm.hubspot.Utils.TestBase;
 
 public class TestCreateNewContact extends TestBase{
 	
@@ -32,6 +32,8 @@ public class TestCreateNewContact extends TestBase{
 		newContactDetails.put(CRMConstanst.Address, CRMConstanst.AddressValue);
 		newContactDetails.put(CRMConstanst.City,CRMConstanst.CityValue);
 		newContactDetails.put(CRMConstanst.State, CRMConstanst.StateValue);
+		newContactDetails.put(CRMConstanst.Email, CRMConstanst.EmailValue);
+		newContactDetails.put(CRMConstanst.Country , CRMConstanst.CountryValue);
 	}
 	
 	
@@ -52,6 +54,9 @@ public class TestCreateNewContact extends TestBase{
 		
 		//Create New Contact
 		contactPage.createNewContact(newContactDetails);
+		
+		
+		super.logoutFromApplication();
 	}
 	
 	

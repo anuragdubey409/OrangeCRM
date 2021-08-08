@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.crm.hubspot.Utils.DriverHelper;
+import com.crm.hubspot.DriverUtils.DriverHelper;
 
 public class HomePage extends DriverHelper{
 

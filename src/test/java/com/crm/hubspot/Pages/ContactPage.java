@@ -9,8 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
-import com.crm.hubspot.Utils.CRMConstanst;
-import com.crm.hubspot.Utils.DriverHelper;
+import com.crm.constant.CRMConstanst;
+import com.crm.hubspot.DriverUtils.DriverHelper;
 
 public class ContactPage extends DriverHelper{
 	
@@ -35,6 +35,12 @@ public class ContactPage extends DriverHelper{
 	@FindBy(css = "select[name='ab-temp-6']")
 	private WebElement EmailDropDowm;
 	
+	@FindBy(css= "select[placeholder='Country']")
+	private WebElement countryDropdown;
+	
+	@FindBy(css= "button[class='btn btn-primary save']")
+	private WebElement saveContactButton;
+	
 	public void verifyContactPage(String contactPageText) {
 		String getContactPageText = super.getText(contactPageTitle);
 		if(StringUtils.isNotEmpty(getContactPageText)) {
@@ -46,34 +52,22 @@ public class ContactPage extends DriverHelper{
 	 * Click On Create New Button
 	 */
 	public void clickOnCreateNewConactButton() {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		wait.waitForElementToClickable(createNewContactButton);
 		super.clickOn(createNewContactButton);
 	}
 
 	//Verify NewContact Form Window
 	public void verifyNewContactForm() {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		wait.waitForElementToBeVisible(newContactFormTitle);
 		String newcontactForm = super.getText(newContactFormTitle);
 		Assert.assertTrue(StringUtils.containsIgnoreCase(newcontactForm,CRMConstanst.NewContact));
 	}
 	
+	/**
+	 * Create New Contact Button
+	 * @param contactDetails
+	 */
 	public void createNewContact(Map<String,String> contactDetails) {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.clickOnCreateNewConactButton();
 		this.verifyNewContactForm();
 		int newContactFormLength = newContactFormSize.size();
@@ -85,10 +79,15 @@ public class ContactPage extends DriverHelper{
 			contactDetails.forEach((key,value)->{
 				if(getCurrentTextBoxAttribute.equalsIgnoreCase(key)) {
 					super.sendKey(newContactFormTextBox, value);
+				}else if(key.equalsIgnoreCase("Email")) {
+					super.SelectBy(EmailDropDowm, value);	
+				}else if(key.equalsIgnoreCase("Country")) {
+					super.SelectBy(countryDropdown, value);
 				}
 			});		
 		}
-		super.SelectBy(EmailDropDowm, "Value=secondary");
+		
+		super.clickOn(saveContactButton);
 	}
 	
 }
