@@ -11,6 +11,7 @@ import org.testng.Assert;
 
 import com.crm.constant.CRMConstanst;
 import com.crm.hubspot.DriverUtils.DriverHelper;
+import com.crm.hubspot.GlobalUtils.PropertyFileUtils;
 
 public class ContactPage extends DriverHelper{
 	
@@ -40,6 +41,12 @@ public class ContactPage extends DriverHelper{
 	
 	@FindBy(css= "button[class='btn btn-primary save']")
 	private WebElement saveContactButton;
+	
+	@FindBy(css= "div[data-type='SUBSCRIBER']")
+	private WebElement importButton;
+	
+	@FindBy(css= "input[type='file']")
+	private WebElement fileUpload;
 	
 	public void verifyContactPage(String contactPageText) {
 		String getContactPageText = super.getText(contactPageTitle);
@@ -88,6 +95,19 @@ public class ContactPage extends DriverHelper{
 		}
 		
 		super.clickOn(saveContactButton);
+	}
+	
+	public void clickOnImport() {
+		super.clickOn(importButton);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		driver.getWindowHandle();
+		String path = PropertyFileUtils.currentProjectPath()+"//src//test//resources//ImportContact.csv";
+		super.clickOn(fileUpload);
+		//super.sendKey(fileUpload,path);
 	}
 	
 }
