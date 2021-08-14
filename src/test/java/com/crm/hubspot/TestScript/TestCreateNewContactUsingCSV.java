@@ -17,12 +17,11 @@ import com.crm.hubspot.Pages.ContactPage;
 import com.crm.hubspot.Pages.DashboardPage;
 import com.crm.hubspot.beansUtil.ImportContactBean;
 
-public class TestCreateNewContactUsingCSV extends TestBase{
-	
-	
+public class TestCreateNewContactUsingCSV extends TestBase {
+
 	String userName;
-	String password;	
-	
+	String password;
+
 	@BeforeClass
 	public void init() {
 		PropertyFileUtils property = new PropertyFileUtils("testData.properties");
@@ -36,33 +35,37 @@ public class TestCreateNewContactUsingCSV extends TestBase{
 		csvUtils = new CSVUtils("ImportContact");
 		String fileParam[] = { contactBean.getName(), contactBean.getEmail(), contactBean.getRole(),
 				contactBean.getPhone() };
+		contactBean.setName(super.generateRandomName());
 		String fileParam1[] = { contactBean.getName(), contactBean.getEmail(), contactBean.getRole(),
 				contactBean.getPhone() };
-		List<String[]> fileParameter =  new ArrayList<String[]>();
+		List<String[]> fileParameter = new ArrayList<String[]>();
 		fileParameter.add(fileParam);
 		fileParameter.add(fileParam1);
 		csvUtils.writeCSVFile(fileParameter);
 	}
-	
-	
+
 	@Test
 	public void CreateNewContact() {
-		
-		
-		//Login to the application
+
+		// Login to the application
 		dashboardPage = loginToTheApplication(userName, password, DashboardPage.class);
-		
-		//Verify Dashboard
+
+		// Verify Dashboard
 		dashboardPage.verifyDashboard(CRMConstanst.dashboardText);
-		
-		//Navigate To Contact
-		contactPage = dashboardPage.navigateToMenu(CRMConstanst.Contacts, CRMConstanst.Contacts, ContactPage.class);	
-		
+
+		// Navigate To Contact
+		contactPage = dashboardPage.navigateToMenu(CRMConstanst.Contacts, CRMConstanst.Contacts, ContactPage.class);
+
 		contactPage.verifyContactPage(CRMConstanst.Contacts);
-		
+
 		contactPage.clickOnImport();
+				
+	}
+	
+	@Test
+	public void VerifyConactUploadedSuccessfullyUsingEmail() {
 		
-   }
-	
-	
+		
+	}
+
 }

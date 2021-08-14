@@ -88,7 +88,7 @@ public class TestBase extends InitializeClass{
 		driver = new EdgeDriver();
 	}
 	
-	public String generateRandomName() {
+	public static String generateRandomName() {
 		Random rand = new Random();
 		int randomDigit = rand.nextInt(100000);
 		return "Test"+randomDigit;

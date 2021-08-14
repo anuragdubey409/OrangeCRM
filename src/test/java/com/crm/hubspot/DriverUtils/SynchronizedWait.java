@@ -60,7 +60,16 @@ public class SynchronizedWait {
 		wait = new WebDriverWait(driver, waitForElementPresent);
 		wait.until(ExpectedConditions.presenceOfElementLocated(Locator));
 	}
-
+	
+	//hard Sleep For  
+	public void hardSleep(int time) {
+		try {
+			Thread.sleep(time);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Fluent Wait
 	 * @param element

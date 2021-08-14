@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -13,10 +14,13 @@ public class DriverHelper {
 
 	protected WebDriver driver;
 	protected SynchronizedWait wait;
+	protected JavaScriptUtils jsUtils;
+	protected JavascriptExecutor jse;
 	
 	protected DriverHelper(WebDriver driver) {
 		this.driver = driver;
 		wait = new SynchronizedWait(driver);
+		jsUtils = new JavaScriptUtils(driver);
 		
 	}
 
@@ -95,6 +99,11 @@ public class DriverHelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void clickUsingJavaScriptExecutor(WebElement element) {
+		jse = (JavascriptExecutor) driver;
+		jse.executeScript("arguments[0].click();",element);
 	}
 
 	public String getText(WebElement element) {
@@ -184,4 +193,18 @@ public class DriverHelper {
 		}
 	}
 	
+	public void switchToNewWindow() {
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle); 
+		}
+	}
+	
+	//Switch To Window
+	public void switchToWindow(String windowId) {
+		driver.switchTo().window(windowId);
+	}
+	
+	public String getCurrentWindowId() {
+		return driver.getWindowHandle();
+	}
 }
